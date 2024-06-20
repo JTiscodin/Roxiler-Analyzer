@@ -1,30 +1,29 @@
+import { itemModel } from "./models";
 
-import { itemModel } from "./models"
+let Item = itemModel;
 
-let Item = itemModel
+const findData = async () => {
+  let response = await fetch(
+    "https://s3.amazonaws.com/roxiler.com/product_transaction.json"
+  );
 
-const findData = async() => {
-    let response = await fetch("https://s3.amazonaws.com/roxiler.com/product_transaction.json")
+  let data = await response.json();
+  return data;
+};
 
-    let data = await response.json()
+const seedDatabase = async () => {
+  try {
+    //deleting past entires
+    await Item.deleteMany({});
 
-    return data
+    //fetching data
+    let results = await findData();
 
-}
+    //Inserting / Seeding new data
+    await Item.insertMany(results);
+  } catch (e) {
+    console.log(e);
+  }
+};
 
-const seedDatabase = async() => {
-    try{
-        //deleting past entires
-        await Item.deleteMany({});
-
-        //fetching data
-        let results = await findData()
-
-        //Inserting / Seeding new data
-        await Item.insertMany(results)
-    }catch(e){
-        console.log(e)
-    }
-}
-
-export default seedDatabase
+export default seedDatabase;
