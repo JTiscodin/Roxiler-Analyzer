@@ -35,7 +35,6 @@ app.get("/getmultipledata", async (req, res) => {
   const searchString = req.query.search?.toString() || "";
   let page = parseInt(req.query.page?.toString() || "1");
   const month: Months = (req.query.month?.toString() as Months) || Months.March;
-  const monthNumber = monthMap.get(Months[month]) ?? 3;
 
   const data = await fetch(
     "http://localhost:5000/listdata?page=" +
@@ -213,3 +212,5 @@ mongoose.connect(url).then(() => {
     console.log("Server started successfully on port " + port);
   });
 });
+
+export default app
