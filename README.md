@@ -16,7 +16,11 @@ Sales Analytics Dashboard is a powerful web application designed to provide insi
 
 Check out the video below to see the Sales Analytics Dashboard in action:
 
-[Add your demo video here]
+
+
+https://github.com/JTiscodin/Roxiler-Analyzer/assets/113091818/4d5a4731-162d-40b7-939d-22d4d86dba47
+
+
 
 ## Tech Stack
 
@@ -30,7 +34,6 @@ Check out the video below to see the Sales Analytics Dashboard in action:
 - **Database**:
   - MongoDB
 - **Other Tools**:
-  - Moment.js (for date handling)
   - Cors (for cross-origin resource sharing)
   - Dotenv (for environment variable management)
 
