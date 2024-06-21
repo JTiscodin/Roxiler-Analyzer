@@ -1,15 +1,15 @@
 import { useRef, useEffect, useMemo } from "react";
 
-export const useDebounce = (fn, delay) => {
+export const useDebounce = (fn, delay: number) => {
   const ref = useRef();
 
   useEffect(() => {
     ref.current = fn;
   }, [fn]);
 
-  const debounce = (fn, duration) => {
-    let timelimit;
-    return function (...args) {
+  const debounce = (fn, duration: number) => {
+    let timelimit: any;
+    return function (...args: any[]) {
       if (!timelimit) {
         return (timelimit = setTimeout(() => fn(...args), duration));
       } else {

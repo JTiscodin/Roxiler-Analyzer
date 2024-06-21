@@ -5,7 +5,7 @@ import { pieChartData } from "@/lib/types";
 ChartJS.register(...registerables);
 
 type barChartProps = {
-  data: pieChartData[];
+  data: pieChartData[] | undefined;
   month: string
 };
 

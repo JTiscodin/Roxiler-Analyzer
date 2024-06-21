@@ -8,7 +8,7 @@ import {
 import { Data, Months } from "@/lib/types";
 
 type statisticsProps = {
-  data: Data["statisticsData"];
+  data: Data["statisticsData"] | undefined;
   month: Months
 };
 

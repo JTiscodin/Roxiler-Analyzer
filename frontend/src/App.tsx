@@ -10,7 +10,7 @@ import {
 import "./App.css";
 import { Input } from "./components/ui/input";
 import { DataTable } from "./components/DataTable";
-import { Data, Item, Months } from "./lib/types";
+import { Data, Months } from "./lib/types";
 import { BarChart } from "./components/BarChart";
 import { PieChart } from "./components/PieChart";
 import { useDebounce } from "./hooks/DebounceHook";
@@ -20,9 +20,9 @@ function App() {
 
   const [data, setData] = useState<Data>();
 
-  const [month, setMonth] = useState(Months.March);
+  const [month, setMonth] = useState<Months>(Months.March);
 
-  const [page, setPage] = useState<string>("1");
+  const [page] = useState<string>("1");
 
   const fetchData = async () => {
     try {
@@ -50,7 +50,10 @@ function App() {
 
   return (
     <div className="min-h-screen w-screen gap-10 flex items-center justify-center flex-col">
-      <h1 className="text-4xl mt-6 bg-orange-700 text-white p-6 rounded-3xl"> Transaction Dashboard </h1>
+      <h1 className="text-4xl mt-6 bg-orange-700 text-white p-6 rounded-3xl">
+        {" "}
+        Transaction Dashboard{" "}
+      </h1>
       <div className="flex justify-evenly w-[80vw]">
         <Input
           value={search}
@@ -58,7 +61,7 @@ function App() {
           className="w-[20vw]"
           placeholder="Search"
         />
-        <Select defaultValue={month} onValueChange={(month) => setMonth(month)}>
+        <Select defaultValue={month} onValueChange={(month:Months) => setMonth(month)}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Select Month" />
           </SelectTrigger>

@@ -5,7 +5,7 @@ import { barChartData } from "@/lib/types";
 ChartJS.register(...registerables);
 
 type barChartProps = {
-  data: barChartData[];
+  data: barChartData[] | undefined;
   month: string;
 };
 
