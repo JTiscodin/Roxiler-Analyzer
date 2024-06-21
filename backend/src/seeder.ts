@@ -1,10 +1,13 @@
 import { itemModel } from "./models";
+import dotenv from "dotenv";
+
+dotenv.config()
 
 let Item = itemModel;
 
 const findData = async () => {
   let response = await fetch(
-    "https://s3.amazonaws.com/roxiler.com/product_transaction.json"
+    process.env.SEED_DATABASE_URL || ""
   );
 
   let data = await response.json();

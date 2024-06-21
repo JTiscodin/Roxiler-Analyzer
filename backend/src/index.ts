@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(cors());
 
 const url = process.env.DATABASE_URL || "";
-const port = process.env.PORT;
+const port = process.env.PORT || 5000;
 const Item = itemModel;
 
 const monthMap = new Map([
@@ -92,7 +92,7 @@ app.get("/listdata", async (req, res) => {
       //Creating a query to return the items of the specified months
       $expr: { $eq: [{ $month: "$dateOfSale" }, monthNumber] },
     },
-    ["-_id", "-__v"]
+    ["-_id", "-__v", "-dateOfSale"]
   )
     .limit(limit)
     .skip(startIndex)

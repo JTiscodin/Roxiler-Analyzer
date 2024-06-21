@@ -16,23 +16,25 @@ import { PieChart } from "./components/PieChart";
 import { useDebounce } from "./hooks/DebounceHook";
 import { Statistics } from "./components/Statistics";
 function App() {
+  const BACKEND_URL : string = import.meta.env.VITE_BACKEND_URL
+
   const [search, setSearch] = useState<string>("");
-
+  
   const [data, setData] = useState<Data>();
-
+  
   const [month, setMonth] = useState<Months>(Months.March);
-
+  
   const [page] = useState<string>("1");
-
+  
   const fetchData = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/getmultipledata?page=" +
-          page +
-          "&search=" +
-          search +
-          "&month=" +
-          month
+        BACKEND_URL +
+        page +
+        "&search=" +
+        search +
+        "&month=" +
+        month
       );
       const data = await response.json();
       console.log(data);
@@ -41,11 +43,12 @@ function App() {
       console.log(e);
     }
   };
-
+  
   const debouncedFetch = useDebounce(fetchData, 200);
-
+  
   useEffect(() => {
     debouncedFetch();
+    console.log(import.meta.env);
   }, [search, month, page]);
 
   return (
