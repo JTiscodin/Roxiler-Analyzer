@@ -1,31 +1,32 @@
 import { useRef, useEffect, useMemo } from "react";
 
-export const useDebounce = (fn, delay: number) => {
-  const ref = useRef();
+// Define a generic type for the function to be debounced
+type DebouncedFunction = (...args: unknown[]) => void;
+
+export const useDebounce = <T extends DebouncedFunction>(fn: T, delay: number): T => {
+  const ref = useRef<T>();
 
   useEffect(() => {
     ref.current = fn;
   }, [fn]);
 
-  const debounce = (fn, duration: number) => {
-    let timelimit: any;
-    return function (...args: any[]) {
-      if (!timelimit) {
-        return (timelimit = setTimeout(() => fn(...args), duration));
-      } else {
-        clearTimeout(timelimit);
-        return (timelimit = setTimeout(() => fn(...args), duration));
+  const debounce = (func: T, duration: number): T => {
+    let timeoutId: NodeJS.Timeout | null = null;
+    
+    return ((...args: Parameters<T>) => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
       }
-    };
+      timeoutId = setTimeout(() => func(...args), duration);
+    }) as T;
   };
 
   const debouncedCallback = useMemo(() => {
-    const func = () => {
-      ref.current?.();
+    const func = (...args: Parameters<T>) => {
+      ref.current?.(...args);
     };
-    //We don't directly return debounce( ref.current?.(), delay) instead of the value down below, because if during the delay the value of ref.current changes, then we can see bugs, or unexpected things.
-    return debounce(func, delay);
-  }, []);
+    return debounce(func as T, delay);
+  }, [delay])
 
   return debouncedCallback;
 };
