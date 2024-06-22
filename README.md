@@ -37,8 +37,6 @@ https://github.com/JTiscodin/Roxiler-Analyzer/assets/113091818/4d5a4731-162d-40b
   - Cors (for cross-origin resource sharing)
   - Dotenv (for environment variable management)
 
-## Getting Started
-
 ### Prerequisites
 
 - Node.js (v14 or later)
